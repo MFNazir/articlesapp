@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom mb-4">
   <div class="container">
-    <%= link_to "Rails App", root_path, class: "navbar-brand" %>
+    <%= link_to "PACER Auth App", root_path, class: "navbar-brand" %>
 
     <div class="navbar-collapse">
       <ul class="navbar-nav">
@@ -11,23 +11,23 @@
     </div>
 
     <% if rodauth.logged_in? %>
-      <div class="dropdown">
-        <button class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" type="button">
+      <div class="row justify-content-end"> <!-- Add 'justify-content-end' class here -->
+        <div class="col">
           <%= current_account.profile.name %>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end">
-          <%= link_to "Change password", rodauth.change_password_path, class: "dropdown-item" %>
-          <%= link_to "Change email", rodauth.change_login_path, class: "dropdown-item" %>
-          <div class="dropdown-divider"></div>
-          <%= link_to "Close account", rodauth.close_account_path, class: "dropdown-item text-danger" %>
-          <%= link_to "Sign out", rodauth.logout_path, data: { turbo_method: :post }, class: "dropdown-item" %>
+          <%= link_to "Change password", rodauth.change_password_path, class: "btn btn-outline-primary" %>
+          <%= link_to "Change email", rodauth.change_login_path, class: "btn btn-outline-primary" %>
+          <%= link_to "Close account", rodauth.close_account_path, class: "btn btn-outline-primary" %>
+          <%= link_to "Sign out", rodauth.logout_path, data: { turbo_method: :post }, class: "btn btn-danger" %>
         </div>
       </div>
     <% else %>
-      <div>
-        <%= link_to "Sign in", rodauth.login_path, class: "btn btn-outline-primary" %>
-        <%= link_to "Sign up", rodauth.create_account_path, class: "btn btn-success" %>
+      <div class="row justify-content-end"> <!-- Add 'justify-content-end' class here -->
+        <div class="col">
+          <%= link_to "Sign in", rodauth.login_path, class: "btn btn-outline-primary" %>
+          <%= link_to "Sign up", rodauth.create_account_path, class: "btn btn-success" %>
+        </div>
       </div>
     <% end %>
+
   </div>
 </nav>
