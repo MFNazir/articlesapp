@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_175824) do
+ActiveRecord::Schema.define(version: 2023_08_05_200755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2022_02_09_175824) do
     t.string "key", null: false
     t.string "login", null: false
     t.datetime "deadline", precision: 6, null: false
+  end
+
+  create_table "account_otp_keys", force: :cascade do |t|
+    t.string "key", null: false
+    t.integer "num_failures", default: 0, null: false
+    t.datetime "last_use", precision: 6, default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "account_password_hashes", force: :cascade do |t|
@@ -74,6 +80,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_175824) do
 
   add_foreign_key "account_email_auth_keys", "accounts", column: "id"
   add_foreign_key "account_login_change_keys", "accounts", column: "id"
+  add_foreign_key "account_otp_keys", "accounts", column: "id"
   add_foreign_key "account_password_hashes", "accounts", column: "id"
   add_foreign_key "account_password_reset_keys", "accounts", column: "id"
   add_foreign_key "account_remember_keys", "accounts", column: "id"
