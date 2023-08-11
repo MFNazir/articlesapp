@@ -17,11 +17,15 @@
       </button>
       <div class="row justify-content-end"> <!-- Add 'justify-content-end' class here -->
         <div class="col">
+          <% if rodauth.uses_two_factor_authentication? %>
           <%= link_to "Change password", rodauth.change_password_path, class: "btn btn-outline-primary" %>
           <%= link_to "Change email", rodauth.change_login_path, class: "btn btn-outline-primary" %>
           <%= link_to "Manage MFA", rodauth.two_factor_manage_path, class: "btn btn-outline-primary" %>
           <%= link_to "Close account", rodauth.close_account_path, class: "btn btn-outline-primary" %>
           <%= link_to "Sign out", rodauth.logout_path, data: { turbo_method: :post }, class: "btn btn-danger" %>
+          <% else %>
+          <%= link_to "Sign out", rodauth.logout_path, data: { turbo_method: :post }, class: "btn btn-danger" %>
+          <% end %>
         </div>
       </div>
     <% else %>
